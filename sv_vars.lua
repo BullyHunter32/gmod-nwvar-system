@@ -91,7 +91,7 @@ local function SyncAllPublic(ply)
     net.Send(ply)
 end
 
-hook.Add(--[["LoadPlayerData"]] "PlayerSpawn", "Vars.SyncAll", function(ply)
+hook.Add("PlayerInitialSpawn", "Vars.SyncAll", function(ply)
     timer.Simple(1, function()
         SyncAllPublic(ply)
     end)
