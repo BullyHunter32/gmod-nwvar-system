@@ -30,7 +30,7 @@ local function ReadType(type)
     return
 end
 
-net.Receive("ProGamer.Vars.Sync", function()
+net.Receive("Vars.Sync", function()
     local isPublic = net.ReadBool()
     local ent = net.ReadEntity()
     local type = net.ReadUInt(8)
@@ -68,7 +68,7 @@ local function ReadTypeTable(ent)
     end
 end
 
-net.Receive("ProGamer.Vars.SyncAll", function()
+net.Receive("Vars.SyncAll", function()
     local len = net.ReadUInt(14)
     for i = 1, len do
         local ent = net.ReadEntity()

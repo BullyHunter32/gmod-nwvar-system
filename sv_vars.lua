@@ -66,7 +66,7 @@ local function WriteAllVars(ent)
     WriteTypeTable(ent, TYPE_FLOAT)
 end
 
-util.AddNetworkString("ProGamer.Vars.SyncAll")
+util.AddNetworkString("Vars.SyncAll")
 local function SyncAllPublic(ply)
     local world = Entity(0)
 
@@ -83,7 +83,7 @@ local function SyncAllPublic(ply)
     end
 
     local len = #_ENTS
-    net.Start("ProGamer.Vars.SyncAll")
+    net.Start("Vars.SyncAll")
     net.WriteUInt(len, 14)
     for i = 1, len do
         WriteAllVars(_ENTS[i])
@@ -91,19 +91,19 @@ local function SyncAllPublic(ply)
     net.Send(ply)
 end
 
-hook.Add(--[["LoadPlayerData"]] "PlayerSpawn", "ProGamer.Vars.SyncAll", function(ply)
+hook.Add(--[["LoadPlayerData"]] "PlayerSpawn", "Vars.SyncAll", function(ply)
     timer.Simple(1, function()
         SyncAllPublic(ply)
     end)
 end)
 
-util.AddNetworkString("ProGamer.Vars.Sync")
+util.AddNetworkString("Vars.Sync")
 local function SyncVar(ent, type, key, value, recipient)
     if recipient == nil then
         recipient = true
     end
 
-    net.Start("ProGamer.Vars.Sync")
+    net.Start("Vars.Sync")
     net.WriteBool(recipient == true)
     net.WriteEntity(ent)
     net.WriteUInt(type, 8)
