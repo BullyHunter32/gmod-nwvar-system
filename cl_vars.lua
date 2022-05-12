@@ -2,7 +2,7 @@ local NW_TypesTable = NW_TypesTable
 local Type2String = Type2String
 
 local function ReadType(type)
-    NW_TypesTable[ type ].read()
+    return NW_TypesTable[ type ].read()
 end
 
 net.Receive("Vars.Sync", function()
