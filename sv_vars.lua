@@ -116,6 +116,8 @@ local function SyncVar(ent, type, key, value, recipient)
     end
 end
 
+local ENTITY = FindMetaTable("Entity")
+
 function ENTITY:SetPublicString(key, value)
     local dat = self:GetPublicVars("String")
     dat[key] = value
