@@ -1,33 +1,8 @@
-local TYPE_FLOAT = 45
-
-local function Type2String(type)
-    if type == TYPE_STRING then
-        return "String"
-    elseif type == TYPE_NUMBER then
-        return "Int"
-    elseif type == TYPE_ENTITY then
-        return "Entity"
-    elseif type == TYPE_BOOL then
-        return "Bool"
-    elseif type == TYPE_FLOAT then
-        return "Float"
-    end
-    return ""
-end
+local NW_TypesTable = NW_TypesTable
+local Type2String = Type2String
 
 local function ReadType(type)
-    if type == TYPE_STRING then
-        return net.ReadString()
-    elseif type == TYPE_NUMBER then
-        return net.ReadInt(32)
-    elseif type == TYPE_ENTITY then
-        return net.ReadEntity()
-    elseif type == TYPE_BOOL then
-        return net.ReadBool()
-    elseif type == TYPE_FLOAT then
-        return net.ReadFloat()
-    end
-    return
+    return NW_TypesTable[ type ].read()
 end
 
 net.Receive("Vars.Sync", function()

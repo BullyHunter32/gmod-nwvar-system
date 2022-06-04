@@ -1,6 +1,7 @@
-local TYPE_FLOAT = 45
-
 local ENTS = {}
+
+local NW_TypesTable = NW_TypesTable
+local Type2String = Type2String
 
 local function IterTable(tbl)
     local new = {
@@ -13,39 +14,14 @@ local function IterTable(tbl)
     return new
 end
 
-local function WriteType(type, val)
-    if type == TYPE_NUMBER then
-        net.WriteInt(val, 32)
-    elseif type == TYPE_BOOL then
-        net.WriteBool(val)
-    elseif type == TYPE_STRING then
-        net.WriteString(val)
-    elseif type == TYPE_ENTITY then
-        net.WriteEntity(val)
-    elseif type == TYPE_FLOAT then
-        net.WriteFloat(val)
-    end
+local function WriteType( type, val )
+    NW_TypesTable[ type ].write( val )
 end
 
 local function WriteSet(type, set)
     local k, v = set[1], set[2]
     net.WriteString(k)
     WriteType(type, v)
-end
-
-local function Type2String(type)
-    if type == TYPE_STRING then
-        return "String"
-    elseif type == TYPE_NUMBER then
-        return "Int"
-    elseif type == TYPE_ENTITY then
-        return "Entity"
-    elseif type == TYPE_BOOL then
-        return "Bool"
-    elseif type == TYPE_FLOAT then
-        return "Float"
-    end
-    return ""
 end
 
 local function WriteTypeTable(ent, type)

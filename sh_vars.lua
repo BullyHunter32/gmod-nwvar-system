@@ -1,3 +1,35 @@
+TYPE_FLOAT = 45
+
+NW_TypesTable = {
+    [ TYPE_NUMBER ] = {
+        read = function( num )
+            net.ReadInt( num, 32 )
+        end,
+        write = function( num ) 
+            net.WriteInt( num, 32 )
+        end,
+        str = "Int"
+    },
+    [ TYPE_ENTITY ] = {
+        read = net.ReadEntity,
+        write = net.WriteEntity,
+        str = "Entity"
+    },
+    [ TYPE_BOOL ] = {
+        read = net.ReadBool,
+        write = net.WriteBool,
+        str = "Bool"
+    },
+    [ TYPE_FLOAT ] = {
+        read = net.ReadFloat,
+        write = net.WriteFloat,
+        str = "Float"
+    }
+}
+
+function Type2String( type )
+    return NW_TypesTable[ type ].str
+end
 
 local function BuildVarTable()
     local tbl = {
