@@ -10,6 +10,8 @@ local function BuildVarTable()
     return tbl
 end
 
+local ENTITY = FindMetaTable("Entity")
+
 function ENTITY:GetPublicVars(s)
     if not self.m_tPublicVars then
         self.m_tPublicVars = BuildVarTable()
